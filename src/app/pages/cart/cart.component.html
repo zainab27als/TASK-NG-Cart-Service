@@ -1,3 +1,20 @@
 <div class="cart-container">
   <h2>Your Cart 🛒</h2>
+  <div *ngIf="productInCart.length === 0">Your Cart is Empty</div>
+  <div *ngFor="let item of productInCart; let i = index" class="cart-item">
+    <h3>{{ item.name }}</h3>
+    <p>Price: ${{ item.price }}</p>
+
+    <div class="quantity-controls">
+      <button (click)="decreaseQuantity(item)">-</button>
+      <span>{{ item.quantity }}</span>
+      <button (click)="increaseQuantity(item)">+</button>
+    </div>
+
+    <p>Total: ${{ getItemTotal(item) }}</p>
+    <button (click)="removeItem(i)">Remove</button>
+  </div>
+
+  <hr />
+  <h3>Total Cart Value: ${{ getCartTotal() }}</h3>
 </div>
